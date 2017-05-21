@@ -43,7 +43,7 @@ def merge_feature_to_train(train_data):
 	for index,file in enumerate(files):
 		right_data=pd.read_csv(folder_path+file)
 		train_data=train_data.merge(right_data, left_on=keys[index], right_on=keys[index], how='left')
-	train_data.to_csv('all_data.csv',header=0)
+	train_data.to_csv('all_train_data.csv')
 
 #统计特征与label的相关性
 def feature_label_correlation(data):
