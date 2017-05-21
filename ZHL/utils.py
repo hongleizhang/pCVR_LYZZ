@@ -67,3 +67,14 @@ def feature_label_correlation(data):
 			f.write("==========s========================================")
 			f.write("\n")
 
+#分段clickTime并且统计每个段的概率，然后填充到新列clickTimePro中
+def add_feature_clickTimePro(train_data):
+	train_data['clickHour']=pd.Series([str(x)[2:4]for x in data.clickTime])
+	print(train_data.tail(1))
+	hourDict=train_data.groupby(['clickHour'])['label'].mean()
+	print(hourDict)
+	train_data['clickTimePro']=0.0
+	for i in hourDict.index:
+		train_data.loc[train_data.clickHour==i,'clickTimePro']=hourDict[i]
+	print(train_data.tail(3))
+	return train_data
